@@ -1,4 +1,4 @@
-package controller;
+package controller.admin;
 
 import entity.Category;
 import entity.Product;
@@ -6,23 +6,20 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
 
 @RestController
 @Tag(name = "Работа с товаром",description = "В этом контроллере описаны CRUD операции для взаимодействия с товаром")
-@RequestMapping("/www")
+@RequestMapping("/admin/product")
 public class ProductController {
 
     @Operation(
             summary = "возвращает все товары"
     )
-    @GetMapping(value = "product")
+    @GetMapping(value = "get")
     public List<Product> getAllProducts() {
         return Arrays.asList(new Product(), new Product());
     }
@@ -39,29 +36,36 @@ public class ProductController {
             @ApiResponse(responseCode = "404", description = "Ресурс не найден",
                     content = @io.swagger.v3.oas.annotations.media.Content)
     })
+
     @GetMapping(value = "products")
     public List<Product> getAllProductsFromCategory(@RequestBody Category category) {
         return null;
     }
 
-//    @Operation(
-//            summary = "добавляет новый товар в бд"
-//    )
-//    public void createProduct(@RequestBody Product product) {
-//
-//    }
-//
-//    @Operation(
-//            summary = "изменяет товар в бд"
-//    )
-//    public void updateProduct(@RequestBody Product product){
-//
-//    }
-//
-//    @Operation(
-//            summary = "удаляет товар из бд"
-//    )
-//    public void deleteProduct(@RequestBody Product product){
-//
-//    }
+    @Operation(
+            summary = "добавляет новый товар в бд"
+    )
+
+    @PostMapping("/create")
+    public void createProduct(@RequestBody Product product) {
+
+    }
+
+    @Operation(
+            summary = "изменяет товар в бд"
+    )
+
+    @PutMapping("/update")
+    public void updateProduct(@RequestBody Product product){
+
+    }
+
+    @Operation(
+            summary = "удаляет товар из бд"
+    )
+
+    @DeleteMapping("/delete")
+    public void deleteProduct(@RequestBody Product product){
+
+    }
 }
